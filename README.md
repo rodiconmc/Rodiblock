@@ -6,10 +6,10 @@ Many of our games require structures to be placed into the world. To make this a
 ***This depends on [Flow Nbt](https://github.com/flow/nbt)***
 
 What this does right now
-[x]  Reads an nbt structure file (saved from a structure block) and places it at a given location
-[x]  Can mirror in the X or Z direction
+- [x]  Reads an nbt structure file (saved from a structure block) and places it at a given location
+- [x]  Can mirror in the X or Z direction
 
 What it can't do right now
-[]  Place entities (because that would require NMS code)
-[]  Rotate (Could be added in the future.)
+- [ ]  Place entities (because that would require NMS code)
+- [ ]  Rotate (Could be added in the future.)
 
