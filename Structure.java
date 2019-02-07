@@ -1,5 +1,5 @@
-import com.rodicon.structure.nbt.*; //Replace with proper path to FlowNBT
-import com.rodicon.structure.nbt.stream.NBTInputStream; //Replace with proper path to FlowNBT
+import com.rodiconmc.structure.nbt.*; //Replace with proper path to FlowNBT
+import com.rodiconmc.structure.nbt.stream.NBTInputStream; //Replace with proper path to FlowNBT
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
