@@ -18,8 +18,8 @@ What it can't do right now
 - [ ]  Rotate (Could be added in the future.)
 
 # Gradle / Maven
-Coming Soon
+Check here for the maven/gradle import instructions: https://bintray.com/rodiconmc/RodiconRepo/Rodiblock
 
 # Javadocs
-Coming Soon
+https://rodiconmc.github.io/Rodiblock/
 
