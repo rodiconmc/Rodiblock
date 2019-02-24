@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"com.rodiconmc.rodiblock","c":"Structure","l":"placeStructure(File, Location, boolean, boolean)","url":"placeStructure(java.io.File,org.bukkit.Location,boolean,boolean)"},{"p":"com.rodiconmc.rodiblock","c":"Structure","l":"Structure()","url":"%3Cinit%3E()"}]

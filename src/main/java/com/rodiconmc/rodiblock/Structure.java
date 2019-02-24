@@ -1,5 +1,7 @@
-import com.rodiconmc.structure.nbt.*; //Replace with proper path to FlowNBT
-import com.rodiconmc.structure.nbt.stream.NBTInputStream; //Replace with proper path to FlowNBT
+package com.rodiconmc.rodiblock;
+
+import com.flowpowered.nbt.*;
+import com.flowpowered.nbt.stream.NBTInputStream;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -8,15 +10,21 @@ import org.bukkit.block.data.BlockData;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Structure {
 
-
-    public static void placeStructure(File file, Location target, boolean mirrorX, boolean mirrorZ) throws IOException {
+    /**
+     * The function that places a structure into a world from an NBT file. You can generate this file using the in-game
+     * <a href="https://minecraft.gamepedia.com/Structure_Block">Structure Block</a>
+     * @param file NBT file of the structure
+     * @param target The lowest value location of where you want to place the structure.
+     * @param mirrorX Whether or not to mirror the structure on the X coordinate. (Does not change block rotation values)
+     * @param mirrorZ Whether or not to mirror the structure on the Z coordinate. (Does not change block rotation values)
+     * @return A list of blocks that were placed
+     * @throws IOException Exception thrown if the NBT file is formatted incorrectly.
+     */
+    public static List<Block> placeStructure(File file, Location target, boolean mirrorX, boolean mirrorZ) throws IOException {
 
         NBTInputStream input = new NBTInputStream(new FileInputStream(file));
 
@@ -73,6 +81,7 @@ public class Structure {
         ListTag blocksList = (ListTag) blocksTag;
         if (!(blocksList.getElementType().equals(CompoundTag.class))) throw new IOException("Blocks List Tag is not of type Compound Tag");
 
+        List<Block> blocks = new ArrayList<>();
         for (Object oTag : blocksList.getValue()) {
             CompoundMap blockTag = ((CompoundTag) oTag).getValue();
             if (!blockTag.containsKey("pos")) throw new IOException("Blocks list does not contain a pos tag");
@@ -96,8 +105,11 @@ public class Structure {
             if (stateIntTag.getValue() > states.length) throw new IOException("Invalid state");
             Block block = new Location(target.getWorld(), target.getX() + x, target.getY() + y, target.getZ() + z).getBlock();
             block.setBlockData(states[stateIntTag.getValue()], false);
+            blocks.add(block);
 
         }
+
+        return blocks;
 
     }
 }
