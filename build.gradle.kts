@@ -1,19 +1,7 @@
-import com.novoda.gradle.release.PublishExtension
-
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath("com.novoda:bintray-release:0.9")
-    }
-}
-
 plugins {
     `java-library`
+    `maven-publish`
 }
-
-apply(plugin = "com.novoda.bintray-release")
 
 repositories {
     jcenter()
@@ -26,12 +14,24 @@ dependencies {
     implementation("org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT")
 }
 
-configure<PublishExtension> {
-    repoName = "RodiconRepo"
-    userOrg = "rodiconmc"
-    groupId = "com.rodiconmc"
-    artifactId = "Rodiblock"
-    publishVersion = "1.0.0"
-    desc = "Lightweight library that allows placement of structures from Structure Block NBT files"
-    website = "https://github.com/rodiconmc/Rodiblock"
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/rodiconmc/rodiblock")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_REPO_USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_REPO_TOKEN")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("RodiconRepo") {
+            from(components["java"])
+            groupId = "com.rodiconmc"
+            artifactId = "rodiblock"
+            version = "1.0.1"
+            description = "Lightweight library that allows placement of structures from Structure Block NBT files"
+        }
+    }
 }
